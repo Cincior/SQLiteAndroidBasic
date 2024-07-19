@@ -10,4 +10,6 @@
     <string name="show_data">Show saved data</string>
     <string name="your_data_hereHINT">Your data here…</string>
     <string name="delete_allBtn">Delete All</string>
+    <string name="update_note">Update note</string>
+    <string name="updating_id">Updating id:</string>
 </resources>
