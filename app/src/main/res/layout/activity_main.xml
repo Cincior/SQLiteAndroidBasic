@@ -135,13 +135,23 @@
         android:layout_marginVertical="20dp"
         />
 
-    <TextView
-        android:id="@+id/DbDataTextView"
+<!--    <TextView-->
+<!--        android:id="@+id/DbDataTextView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:hint="@string/your_data_hereHINT"-->
+<!--        android:padding="10dp"-->
+<!--        android:text=""-->
+<!--        android:textSize="22sp" />-->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:hint="@string/your_data_hereHINT"
-        android:padding="10dp"
-        android:text=""
-        android:textSize="22sp" />
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="7"
+            tools:listitem="@layout/item_layout"/>
+    </ScrollView>
 
 </LinearLayout>
