@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SQLiteTraining</string>
+    <string name="Title">Test SQLite</string>
+    <string name="btnText">Add +</string>
+    <string name="btnSave">Save</string>
+    <string name="title">Title</string>
+    <string name="desc">Description Note</string>
+    <string name="hintDescription">Desciption here</string>
+    <string name="titleHint">Title here</string>
+    <string name="show_data">Show saved data</string>
+    <string name="your_data_hereHINT">Your data here…</string>
+    <string name="delete_allBtn">Delete All</string>
+</resources>
