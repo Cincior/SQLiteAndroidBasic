@@ -5,4 +5,5 @@
     <color name="toolbarColor">#F25422</color>
     <color name="btnAdd">#88B653</color>
     <color name="btnSave">#083D77</color>
+    <color name="transparent">#00083D77</color>
 </resources>

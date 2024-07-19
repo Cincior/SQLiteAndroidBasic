@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
@@ -30,41 +32,41 @@ class MainActivity : AppCompatActivity() {
             dataBase.addNote(title.text.toString(), desc.text.toString())
             title.text = ""
             desc.text = ""
+
+
         }
 
         //Onclick Show_saved_data button handler
         val buttonShow: Button = findViewById(R.id.btnShow)
-        val output = findViewById<TextView>(R.id.DbDataTextView)
+        val output = findViewById<RecyclerView>(R.id.recyclerView)
         buttonShow.setOnClickListener{
-            var index = 1
+            output.layoutManager = LinearLayoutManager(this)
+            val data = ArrayList<ItemsViewModel>()
+
+
             val dataBase = DBHelper(this, null)
             val cursor = dataBase.getNote()
             cursor!!.moveToFirst()
             val titleColIndex = cursor.getColumnIndex(DBHelper.DbTitleCol)
             val descColIndex = cursor.getColumnIndex("Opis")
 
+            val adapter = CustomAdapter(data)
             if (titleColIndex < 0 || descColIndex < 0 || cursor.count <= 0)
             {
-                output.text = "ERROR"
+                data.add(ItemsViewModel("ERROR", ""))
+                output.adapter = adapter
                 return@setOnClickListener
             }
 
-            output.text = ""
-            output.append(index.toString() + ". ")
-            index++
-            output.append(cursor.getString(titleColIndex))
-            output.append(" ")
-            output.append(cursor.getString(descColIndex))
-            output.append("\n")
+           data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
 
             while(cursor.moveToNext())
             {
-                output.append(index.toString() + ". ")
-                output.append(cursor.getString(titleColIndex))
-                output.append(" ")
-                output.append(cursor.getString(descColIndex))
-                output.append("\n")
+                data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
             }
+
+
+            output.adapter = adapter
 
         }
 
