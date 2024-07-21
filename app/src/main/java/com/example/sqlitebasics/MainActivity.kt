@@ -1,6 +1,7 @@
 package com.example.sqlitebasics
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -41,33 +42,30 @@ class MainActivity : AppCompatActivity() {
         val output = findViewById<RecyclerView>(R.id.recyclerView)
         buttonShow.setOnClickListener{
             output.layoutManager = LinearLayoutManager(this)
-            val data = ArrayList<ItemsViewModel>()
-
 
             val dataBase = DBHelper(this, null)
             val cursor = dataBase.getNote()
-            cursor!!.moveToFirst()
-            val titleColIndex = cursor.getColumnIndex(DBHelper.DbTitleCol)
-            val descColIndex = cursor.getColumnIndex("Opis")
 
-            var adapter = CustomAdapter(data)
-            if (titleColIndex < 0 || descColIndex < 0 || cursor.count <= 0)
+            val data = ArrayList<ItemsViewModel>()
+            val adapter = CustomAdapter(data)
+            output.adapter = adapter
+
+
+
+            if (cursor.count == 0)
             {
-                adapter = CustomAdapter(data)
-                data.add(ItemsViewModel("ERROR", "no data to display"))
-                output.adapter = adapter
+                data.add(ItemsViewModel("ERROR", ""))
                 return@setOnClickListener
             }
-
-           data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
-
-            while(cursor.moveToNext())
+            else
             {
-                data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
+                val titleColIndex = cursor.getColumnIndex(DBHelper.DbTitleCol)
+                val descColIndex = cursor.getColumnIndex("Opis")
+                while(cursor.moveToNext())
+                {
+                    data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
+                }
             }
-
-
-            output.adapter = adapter
 
         }
 
