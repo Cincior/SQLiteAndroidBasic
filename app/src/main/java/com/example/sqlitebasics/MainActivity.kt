@@ -1,7 +1,9 @@
 package com.example.sqlitebasics
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +12,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?)
@@ -23,6 +28,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //Disabling keyboard when user clicks outside EditText
+        val mainLayout: View = findViewById(R.id.main)
+        mainLayout.setOnClickListener{
+            disableKeyboard(mainLayout)
+        }
+
+
         //Onclick Save button handler
         val buttonSave = findViewById<Button>(R.id.btnSave)
         buttonSave.setOnClickListener{
@@ -35,6 +47,9 @@ class MainActivity : AppCompatActivity() {
             desc.text = ""
 
 
+            //Disabling keyboard
+            val currentView: View? = this.currentFocus
+            disableKeyboard(currentView)
         }
 
         //Onclick Show_saved_data button handler
@@ -78,6 +93,17 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    // Function for disabling keyboard
+    private fun disableKeyboard(currentView: View?)
+    {
+        if (currentView != null) {
+            val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
+            // hiding keyboard.
+            inputMethodManager.hideSoftInputFromWindow(currentView.windowToken, 0)
+        }
     }
 
 }
