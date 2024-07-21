@@ -42,9 +42,8 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
 
     fun deleteAll()
     {
-        val query = "DELETE FROM " + DBHelper.DbTableName
         val db = writableDatabase
-        val x = db.execSQL(query)
+        val x = db.delete(DbTableName, null, null) // resistant to SQL injection
         Toast.makeText(context, x.toString(), Toast.LENGTH_SHORT).show()
 
     }
