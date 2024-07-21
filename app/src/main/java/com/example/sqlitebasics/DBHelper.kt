@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
+import android.util.Log
 
 class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFactory?):
     SQLiteOpenHelper(context, DbName, factory, DbVersion)
@@ -34,10 +35,11 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
         db.close()
     }
 
-    fun getNote(): Cursor?
+    fun getNote(): Cursor
     {
         val db = this.readableDatabase
-        return db.rawQuery("SELECT * FROM " + DbTableName, null)
+        val r = db.rawQuery("SELECT * FROM " + DbTableName, null)
+        return r
     }
 
     fun deleteAll()
