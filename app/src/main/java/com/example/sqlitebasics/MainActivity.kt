@@ -50,10 +50,11 @@ class MainActivity : AppCompatActivity() {
             val titleColIndex = cursor.getColumnIndex(DBHelper.DbTitleCol)
             val descColIndex = cursor.getColumnIndex("Opis")
 
-            val adapter = CustomAdapter(data)
+            var adapter = CustomAdapter(data)
             if (titleColIndex < 0 || descColIndex < 0 || cursor.count <= 0)
             {
-                data.add(ItemsViewModel("ERROR", ""))
+                adapter = CustomAdapter(data)
+                data.add(ItemsViewModel("ERROR", "no data to display"))
                 output.adapter = adapter
                 return@setOnClickListener
             }
