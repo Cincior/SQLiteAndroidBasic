@@ -1,3 +1,3 @@
 package com.example.sqlitebasics
 
-data class ItemsViewModel(val title: String, val description: String)
+data class ItemsViewModel(val id: Int, val title: String, val description: String)

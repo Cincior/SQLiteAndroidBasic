@@ -13,7 +13,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
+import android.widget.ImageButton
+import res.layout.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,26 +63,29 @@ class MainActivity : AppCompatActivity() {
             val cursor = dataBase.getNote()
 
             val data = ArrayList<ItemsViewModel>()
-            val adapter = CustomAdapter(data)
+            val adapter = CustomAdapter(data, this)
             output.adapter = adapter
 
 
 
             if (cursor.count == 0)
             {
-                data.add(ItemsViewModel("ERROR", ""))
+                data.add(ItemsViewModel(0, "ERROR", ""))
                 return@setOnClickListener
             }
             else
             {
                 val titleColIndex = cursor.getColumnIndex(DBHelper.DbTitleCol)
                 val descColIndex = cursor.getColumnIndex("Opis")
+                val idColIndex = cursor.getColumnIndex("Id")
                 while(cursor.moveToNext())
                 {
-                    data.add(ItemsViewModel(cursor.getString(titleColIndex), cursor.getString(descColIndex)))
+                    data.add(ItemsViewModel(cursor.getInt(idColIndex) ,cursor.getString(titleColIndex), cursor.getString(descColIndex)))
                 }
             }
 
+            dataBase.close()
+            cursor.close()
         }
 
         //Onclick Delete_All button handler
@@ -92,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+
 
     }
 

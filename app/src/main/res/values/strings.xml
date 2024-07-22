@@ -11,6 +11,7 @@
     <string name="your_data_hereHINT">Your data here…</string>
     <string name="delete_allBtn">Delete All</string>
     <string name="update_note">Update note</string>
-    <string name="updating_id">Updating id:</string>
+    <string name="updating_id">Updating id: </string>
     <string name="del">Del</string>
+    <string name="update">Update</string>
 </resources>
