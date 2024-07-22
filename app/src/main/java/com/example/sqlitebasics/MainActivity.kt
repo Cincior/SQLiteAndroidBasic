@@ -22,6 +22,7 @@ import res.layout.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: CustomAdapter
+    private lateinit var data: ArrayList<ItemsViewModel>
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             val dataBase = DBHelper(this, null)
             val cursor = dataBase.getNote()
 
-            val data = ArrayList<ItemsViewModel>()
+            data = ArrayList()
             adapter = CustomAdapter(data, this)
             output.adapter = adapter
 
@@ -102,14 +103,9 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        val mainLayout: View = findViewById(R.id.main)
-//
-//    }
+
 
     // Function for disabling keyboard
     private fun disableKeyboard(currentView: View?)
