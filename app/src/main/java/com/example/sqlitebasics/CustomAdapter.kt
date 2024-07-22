@@ -44,9 +44,9 @@ class CustomAdapter(private val mList: List<ItemsViewModel>, private val context
         }
 
         holder.itemView.setOnClickListener {
-            notifyItemChanged(selectedPosition) // Resetuj tło poprzedniego wybranego elementu
-            selectedPosition = holder.adapterPosition // Zaktualizuj pozycję wybranego elementu
-            notifyItemChanged(selectedPosition) // Ustaw nowe tło dla wybranego elementu
+            notifyItemChanged(selectedPosition)
+            selectedPosition = holder.adapterPosition
+            notifyItemChanged(selectedPosition)
         }
 
         holder.btnUpdate.setOnClickListener {
@@ -87,7 +87,7 @@ class CustomAdapter(private val mList: List<ItemsViewModel>, private val context
         }
     }
 
-    // Showing Alert dialog and return true if user pressed 'yes'
+    // Showing Alert dialog and return true (callback) if user pressed 'yes'
     private fun showAlertDialog(onResult: (Boolean) -> Unit)
     {
         val dialogBuilder = AlertDialog.Builder(context)
