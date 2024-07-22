@@ -69,7 +69,7 @@
         android:layout_height="90dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="@string/btnSave"
+        android:text="@string/update"
         android:textSize="30sp"/>
 
 

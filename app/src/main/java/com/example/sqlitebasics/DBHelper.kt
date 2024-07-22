@@ -13,7 +13,7 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
 {
     override fun onCreate(db: SQLiteDatabase)
     {
-        val query = ("CREATE TABLE " + DbTableName + " (Id INTEGER PRIMARY KEY," + DbTitleCol + " TEXT, Opis TEXT)")
+        val query = ("CREATE TABLE " + DbTableName + " (Id INTEGER PRIMARY KEY," + DbTitleCol + " TEXT, " + DbDescCol + " TEXT)")
 
         db.execSQL(query)
     }
@@ -50,6 +50,19 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
 
     }
 
+    fun update(Id: Int, title: String, description: String)
+    {
+        val db = writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(DbTitleCol, title)
+        contentValues.put(DbDescCol, description)
+        val selection = "Id = ?"
+
+
+        db.update(DbTableName, contentValues, selection, arrayOf(Id.toString()))
+    }
+
 
 
 
@@ -59,5 +72,6 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
         private val DbVersion = 1
         val DbTableName = "tabelaTest"
         val DbTitleCol = "Tytul"
+        val DbDescCol = "Opis"
     }
 }
