@@ -63,6 +63,15 @@ class DBHelper(private val context: Context, factory: SQLiteDatabase.CursorFacto
         db.update(DbTableName, contentValues, selection, arrayOf(Id.toString()))
     }
 
+    fun deleteRow(Id: Int)
+    {
+        val dataBase = writableDatabase
+        val whereClause = "Id = ?"
+
+
+        dataBase.delete(DbTableName, whereClause, arrayOf(Id.toString()))
+    }
+
 
 
 

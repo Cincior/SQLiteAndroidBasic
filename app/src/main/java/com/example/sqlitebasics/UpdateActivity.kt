@@ -41,10 +41,13 @@ class UpdateActivity : AppCompatActivity() {
         btnUpdate.setOnClickListener{
             val dataBase = DBHelper(this, null)
 
-            showAlertDialog { userConfirm ->
-                if(userConfirm)
-                {
-                    dataBase.update(editingId, editTextTitle.text.toString(), editTextDescription.text.toString())
+            showAlertDialog{ userConfirm ->
+                if (userConfirm) {
+                    dataBase.update(
+                        editingId,
+                        editTextTitle.text.toString(),
+                        editTextDescription.text.toString()
+                    )
                     dataBase.close()
                     finish()
                 }
@@ -71,4 +74,5 @@ class UpdateActivity : AppCompatActivity() {
 
         dialogBuilder.create().show()
     }
+
 }

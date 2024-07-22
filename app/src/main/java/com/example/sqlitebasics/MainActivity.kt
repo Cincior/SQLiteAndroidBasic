@@ -14,10 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.Toast
 import res.layout.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var adapter: CustomAdapter
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -63,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             val cursor = dataBase.getNote()
 
             val data = ArrayList<ItemsViewModel>()
-            val adapter = CustomAdapter(data, this)
+            adapter = CustomAdapter(data, this)
             output.adapter = adapter
 
 
@@ -99,6 +104,12 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        val mainLayout: View = findViewById(R.id.main)
+//
+//    }
 
     // Function for disabling keyboard
     private fun disableKeyboard(currentView: View?)
